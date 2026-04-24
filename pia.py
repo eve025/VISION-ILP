@@ -1,9 +1,18 @@
 import cv2
 import numpy as np
 
-# --- nombre de la imagen a procesar ---
-nombre_imagen = 'img01.png'           # nombre de la imagen a procesar
-nombre_salida = 'salida_img01.png'    # Nombre de la imagen procesada a guardar
+# --- nombre de la imagen a procesar y su salida ---
+# nombre_imagen = 'img09-up.png'          
+# nombre_salida = 'salida_img09.png'    
+
+# nombre_imagen = 'img10-up.png'           
+# nombre_salida = 'salida_img10.png' 
+
+# nombre_imagen = 'img11-up.png'           
+# nombre_salida = 'salida_img11.png'     
+
+nombre_imagen = 'img12-up.png'           
+nombre_salida = 'salida_img12.png'     
 
 # 1. Cargar imagen en escala de grises
 img = cv2.imread(nombre_imagen, cv2.IMREAD_GRAYSCALE)
