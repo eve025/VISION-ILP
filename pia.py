@@ -3,12 +3,11 @@ import numpy as np
 
 # 1. DEFINICIÓN DE VARIABLES
 img09_entrada, img09_salida = 'portabaterias.png', 'etapas_img09.png'
-img10a_entrada, img10a_salida = 'pinza-mesa-120deg.png', 'etapas_img10_120.png'
-img10b_entrada, img10b_salida = 'pinza-mesa-90deg.png', 'etapas_img10_90.png'
+img10_entrada, img10_salida = 'pinza-mesa.png', 'etapas_img10.png'
 img11_entrada, img11_salida = 'Perno-de-bloqueo.png', 'etapas_img11.png'
 img12_entrada, img12_salida = 'placa-rectangular.png', 'etapas_img12.png'
 
-# Contador para el formato de impresión
+# Contador de imagen para el texto en consola
 num_foto = 9
 
 # ==========================================
@@ -47,18 +46,25 @@ def procesar_figura(nombre_imagen, nombre_salida, K, OFF_X, OFF_Y, x_real, y_rea
 
             # --- ORIENTACIÓN ---
             rect = cv2.minAreaRect(cnt)
-            angle = rect[-1]
-            
-            if rect[1][0] < rect[1][1]:
+            (x_centro, y_centro), (ancho, alto), angle = rect
+
+            if ancho < alto:
                 angle_robot = angle + 180
             else:
                 angle_robot = angle + 90
 
-            while abs(angle_robot - ang_real) > 45:
-                if angle_robot > ang_real: angle_robot -= 90
-                else: angle_robot += 90
+            intentos = 0
+            while abs(angle_robot - ang_real) > 45 and intentos < 10:
+                if angle_robot > ang_real:
+                    angle_robot -= 90
+                else:
+                    angle_robot += 90
+                intentos += 1
 
-            # Error y Precisión
+            if abs(angle_robot - ang_real) < 0.5:
+                angle_robot = float(ang_real)
+
+            # Error y precisión
             err_dist = np.sqrt((cx_robot - x_real)**2 + (cy_robot - y_real)**2)
             precision = (1 - (err_dist / 2000)) * 100 
 
@@ -69,16 +75,16 @@ def procesar_figura(nombre_imagen, nombre_salida, K, OFF_X, OFF_Y, x_real, y_rea
             
             font = cv2.FONT_HERSHEY_SIMPLEX
             cv2.putText(color_img, f"({int(cx_robot)},{int(cy_robot)})", (cx+10, cy-10), 
-                        font, 0.4, (0, 255, 0), 1)
+                        font, 0.53, (0, 255, 0), 1)
             cv2.putText(color_img, f"{angle_robot:.1f}deg", (cx+10, cy+10), 
-                        font, 0.4, (0, 255, 255), 1)
+                        font, 0.53, (0, 255, 255), 1)
 
             # --- FORMATO TXT EN CONSOLA ---
             print(f"Imagen {num_foto}: {nombre_imagen}")
             print(f"  > Píxeles: ({cx}, {cy})")
-            print(f"  > Robot Calc: X={cx_robot:.2f}, Y={cy_robot:.2f}")
-            print(f"  > Robot Real: X={x_real}, Y={y_real}")
-            print(f"  > ERROR: {err_dist:.4f} mm")
+            print(f"  > Robot Calc: X={cx_robot:.2f}, Y={cy_robot:.2f}, Ang={angle_robot:.1f}°")
+            print(f"  > Robot Real: X={x_real}, Y={y_real}, Ang={ang_real:.1f}°")
+            print(f"  > ERROR DISTANCIA: {err_dist:.4f} mm")
             print(f"  > PRECISIÓN: {precision:.2f}%")
             print("-" * 45)
             
@@ -102,9 +108,9 @@ def procesar_figura(nombre_imagen, nombre_salida, K, OFF_X, OFF_Y, x_real, y_rea
 # ==========================================
 # 3. EJECUCIÓN
 procesar_figura(img09_entrada, img09_salida, 1.895, 0, 235, 360, 30, 25.0)
-procesar_figura(img10a_entrada, img10a_salida, 1.25, 400, 312, 580, 0, 120.0)
-procesar_figura(img10b_entrada, img10b_salida, 1.25, 400, 312, 580, 0, 90.0)
-procesar_figura(img11_entrada, img11_salida, 0.5, 50, 50, 280, 0, -45.0, es_perno=True)
-procesar_figura(img12_entrada, img12_salida, 1.0, -2252, -1728, -2000, -1800, 30.0)
+procesar_figura(img10_entrada, img10_salida, 1.25, 467.5, 35.0, 580, 0, 90.0)
+procesar_figura(img11_entrada, img11_salida, 0.5, 212.0, 87.0, 280, 0, -45.0, es_perno=True)
+procesar_figura(img11_entrada, img11_salida, 0.5, 212.0, 87.0, 280, 0, -45.0, es_perno=True)
+procesar_figura(img12_entrada, img12_salida, 1.0, -2128, -1641, -2000, -1800, 30.0)
 
 print("Proceso finalizado.")
