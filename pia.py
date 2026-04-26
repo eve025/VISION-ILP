@@ -110,7 +110,6 @@ def procesar_figura(nombre_imagen, nombre_salida, K, OFF_X, OFF_Y, x_real, y_rea
 procesar_figura(img09_entrada, img09_salida, 1.895, 0, 235, 360, 30, 25.0)
 procesar_figura(img10_entrada, img10_salida, 1.25, 467.5, 35.0, 580, 0, 90.0)
 procesar_figura(img11_entrada, img11_salida, 0.5, 212.0, 87.0, 280, 0, -45.0, es_perno=True)
-procesar_figura(img11_entrada, img11_salida, 0.5, 212.0, 87.0, 280, 0, -45.0, es_perno=True)
 procesar_figura(img12_entrada, img12_salida, 1.0, -2128, -1641, -2000, -1800, 30.0)
 
 print("Proceso finalizado.")
