@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-#PARÁMETROS DE CALIBRACIÓN (Fijos y reales)
+#PARÁMETROS DE CALIBRACIÓN
 # Estos valores representan la mesa y no cambian por pieza.
 K_PIXEL_MM = 0.25 
 OFF_X = 200.0  
@@ -63,17 +63,6 @@ def procesar_figura(nombre_imagen, nombre_salida, x_real, y_real, ang_real):
             else:
                 angle_robot = angle + 90
 
-            # intentos = 0
-            # while abs(angle_robot - ang_real) > 45 and intentos < 10:
-            #     if angle_robot > ang_real:
-            #         angle_robot -= 90
-            #     else:
-            #         angle_robot += 90
-            #     intentos += 1
-
-            # if abs(angle_robot - ang_real) < 0.5:
-            #     angle_robot = float(ang_real)
-
             # --- COMPARACIÓN CONTRA EL DATO REAL ---
             # Error y precisión
             # usamos x_real, y_real y ang_real para ver qué tan bien lo calcula
@@ -128,5 +117,4 @@ procesar_figura(img10_entrada, img10_salida, 339, 8, 90.0)
 procesar_figura(img11_entrada, img11_salida, 360, 0, -45.0)
 procesar_figura(img12_entrada, img12_salida, 360, 15, 30.0)
 
-# procesar_figura(img12_entrada, img12_salida, 0.25, -2153, -1711, -2000, -1800, 30.0)
 print("Proceso finalizado.")
