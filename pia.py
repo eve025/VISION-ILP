@@ -2,9 +2,9 @@ import cv2
 import numpy as np
 
 # PARÁMETROS DE CALIBRACIÓN
-K_PIXEL_MM = 0.25 
-OFF_X = 200.0  
-OFF_Y = 100.0
+K_PIXEL_MM = 0.25
+OFF_X = -58.0
+OFF_Y = 177.0
 ANGULO_MESA_Y = -30.0 # --- Inclinación R(0, -30, 0) ---
 
 # 1. DEFINICIÓN DE IMAGENES
@@ -107,9 +107,9 @@ def procesar_figura(nombre_imagen, nombre_salida, x_real, y_real, ang_real):
 # Real_X = 312.66 - 200 = 112.7
 # Real_Y = 100 - 10.33 = 89.7
 #(312.66 Robot_X - 200 Offset) y (100 Offset - 10.33 Robot_Y) -> Ubicación física real en la mesa (Resta normal: Y del robot es positiva)
-# procesar_figura(img09_entrada, img09_salida, 112.7, 89.7, 25.0) #real  
+procesar_figura(img09_entrada, img09_salida, 112.7, 89.7, 25.0) #real  
 
-procesar_figura(img09_entrada, img09_salida, 369, 30, 25.0) #calibrado
+# procesar_figura(img09_entrada, img09_salida, 369, 30, 25.0) #calibrado
 
 
 # IMAGEN 10: Pinza para mesa
@@ -117,9 +117,9 @@ procesar_figura(img09_entrada, img09_salida, 369, 30, 25.0) #calibrado
 # Real_X = 450.3 - 200 = 250.3
 # Real_Y = 100 - (-49.27) = 149.3
 #(450.30 Robot_X - 200 Offset) y (100 Offset - (-49.27) Robot_Y) -> Se suma por inversión de signo (Suma por ley de signos: Y del robot es negativa)
-# procesar_figura(img10_entrada, img10_salida, 250.3, 149.3, 90.0)  #real  
+procesar_figura(img10_entrada, img10_salida, 250.3, 149.3, 90.0)  #real  
 
-procesar_figura(img10_entrada, img10_salida, 339, 8, 90.0) #calibrado
+# procesar_figura(img10_entrada, img10_salida, 339, 8, 90.0) #calibrado
 
 
 
@@ -128,9 +128,9 @@ procesar_figura(img10_entrada, img10_salida, 339, 8, 90.0) #calibrado
 # Real_X = 444.66 - 200 = 244.66
 # Real_Y = 100 - 24.52 = 75.48
 #(444.66 Robot_X - 200 Offset) y (100 Offset - 24.52 Robot_Y) -> Perno detectado por contacto físico (Resta normal: Y del robot es positiva)
-# procesar_figura(img11_entrada, img11_salida, 244.7, 75.5, -45.0)  #real  
+procesar_figura(img11_entrada, img11_salida, 244.7, 75.5, -45.0)  #real  
 
-procesar_figura(img11_entrada, img11_salida, 360, 0, -45.0) #calibrado
+# procesar_figura(img11_entrada, img11_salida, 360, 0, -45.0) #calibrado
 
 
 # IMAGEN 12: Placa rectangular (Hueca)
@@ -138,9 +138,9 @@ procesar_figura(img11_entrada, img11_salida, 360, 0, -45.0) #calibrado
 # Real_X = 323.61 - 200 = 123.61
 # Real_Y = 100 - (-11.93) = 111.93 (Suma por ley de signos: Y del robot es negativa)
 # (444.66 Robot_X - 200 Offset) y (100 Offset - 24.52 Robot_Y) -> Resta normal: Y del robot es positiva 
-# procesar_figura(img12_entrada, img12_salida, 123.6, 111.9, 30.0)  #real  
+procesar_figura(img12_entrada, img12_salida, 123.6, 111.9, 30.0)  #real  
 
-procesar_figura(img12_entrada, img12_salida, 360, 15, 30.0) #calibrado
+# procesar_figura(img12_entrada, img12_salida, 360, 15, 30.0) #calibrado
 
 
 print("Proceso finalizado.")
