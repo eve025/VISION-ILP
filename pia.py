@@ -8,12 +8,12 @@ OFF_Y = 177.0
 ANGULO_MESA_Y = -30.0 # --- Inclinación R(0, -30, 0) ---
 
 # 1. DEFINICIÓN DE IMAGENES
-img09_entrada, img09_salida = 'portabaterias.png', 'etapas_img09.png'
-img10_entrada, img10_salida = 'pinza-mesa.png', 'etapas_img10.png'
-img11_entrada, img11_salida = 'Perno-de-bloqueo.png', 'etapas_img11.png'
-img12_entrada, img12_salida = 'placa-rectangular.png', 'etapas_img12.png'
+img09_entrada, img01_salida = '#1.png', 'etapas_img01.png'
+img10_entrada, img02_salida = '#2.png', 'etapas_img02.png'
+img11_entrada, img03_salida = '#3.png', 'etapas_img03.png'
+img12_entrada, img04_salida = '#4.png', 'etapas_img04.png'
 
-num_foto = 9
+num_foto = 1
 
 # ==========================================
 # 2. FUNCIÓN DE PROCESAMIENTO 
@@ -102,45 +102,36 @@ def procesar_figura(nombre_imagen, nombre_salida, x_real, y_real, ang_real):
 # ==========================================
 # 3. EJECUCIÓN (VALIDACIÓN CON CARTESIAN JOG)
 
-# IMAGEN 09: Portabaterías
-# Robot marcó: X=312.663, Y=10.326
-# Real_X = 312.66 - 200 = 112.7
-# Real_Y = 100 - 10.33 = 89.7
-#(312.66 Robot_X - 200 Offset) y (100 Offset - 10.33 Robot_Y) -> Ubicación física real en la mesa (Resta normal: Y del robot es positiva)
-procesar_figura(img09_entrada, img09_salida, 112.7, 89.7, 25.0) #real  
-
-# procesar_figura(img09_entrada, img09_salida, 369, 30, 25.0) #calibrado
+# IMAGEN 01: Engranaje
+# Robot marcó: X=581.699, Y=, 98.84
+# Real_X = 581.7 - 500 = 112.7
+# Real_Y = 98.84 - 0 = 98.84
+#(581.7 Robot_X - 500 Offset) y (0 Offset + 98.84 Robot_Y) 
+procesar_figura(img09_entrada, img01_salida, 81.7, 98.84, 0.0) #real  
 
 
-# IMAGEN 10: Pinza para mesa
-# Robot marcó: X=450.299, Y=-49.270
-# Real_X = 450.3 - 200 = 250.3
-# Real_Y = 100 - (-49.27) = 149.3
-#(450.30 Robot_X - 200 Offset) y (100 Offset - (-49.27) Robot_Y) -> Se suma por inversión de signo (Suma por ley de signos: Y del robot es negativa)
-procesar_figura(img10_entrada, img10_salida, 250.3, 149.3, 90.0)  #real  
-
-# procesar_figura(img10_entrada, img10_salida, 339, 8, 90.0) #calibrado
+# IMAGEN 2: Bracket
+# Robot marcó: X=582.281, Y=98.84
+# Real_X = 582.3 - 500 = 250.3
+# Real_Y = 98.84 - 0 = 149.3
+#(582.3 Robot_X - 500 Offset) y (100 Offset + 98.84 Robot_Y) 
+procesar_figura(img10_entrada, img02_salida, 82.28, 98.84, 45.0)  #real  
 
 
-
-# IMAGEN 11: Perno de bloqueo
-# Robot marcó: X=444.658, Y=24.522
-# Real_X = 444.66 - 200 = 244.66
-# Real_Y = 100 - 24.52 = 75.48
-#(444.66 Robot_X - 200 Offset) y (100 Offset - 24.52 Robot_Y) -> Perno detectado por contacto físico (Resta normal: Y del robot es positiva)
-procesar_figura(img11_entrada, img11_salida, 244.7, 75.5, -45.0)  #real  
-
-# procesar_figura(img11_entrada, img11_salida, 360, 0, -45.0) #calibrado
+# IMAGEN 11: Eslabón 
+# Robot marcó: X=484.548, Y=98.84
+# Real_X = 484.54 - 500 = -15.45
+# Real_Y = 98.84 - 0 = 98.84
+#(484.6 Robot_X - 500 Offset) y (0 Offset + 98.84 Robot_Y)
+procesar_figura(img11_entrada, img03_salida, -15.45, 98.84, 0.0)  #real  
 
 
-# IMAGEN 12: Placa rectangular (Hueca)
-# Robot marcó: X=323.612, Y=-11.932
-# Real_X = 323.61 - 200 = 123.61
-# Real_Y = 100 - (-11.93) = 111.93 (Suma por ley de signos: Y del robot es negativa)
-# (444.66 Robot_X - 200 Offset) y (100 Offset - 24.52 Robot_Y) -> Resta normal: Y del robot es positiva 
-procesar_figura(img12_entrada, img12_salida, 123.6, 111.9, 30.0)  #real  
-
-# procesar_figura(img12_entrada, img12_salida, 360, 15, 30.0) #calibrado
+# IMAGEN 12: Flange
+# Robot marcó: X=639.099, Y=98.84
+# Real_X = 639.099 - 500 = 139.099
+# Real_Y = 98.84 - 0 = 98.84
+# (639.1 Robot_X - 200 Offset) y (0 Offset + 98.84 Robot_Y) 
+procesar_figura(img12_entrada, img04_salida, 139.10, 98.84, 0.0)  #real  
 
 
 print("Proceso finalizado.")
